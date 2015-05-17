@@ -1,7 +1,5 @@
 # odTimeTracker libraries written in Go
 
-[![Build Status](https://travis-ci.org/ondrejd/odtimetracker-go-lib.svg)](https://travis-ci.org/ondrejd/odtimetracker-go-lib)
-
 Library is used in other [odTimeTracker](https://github.com/odTimeTracker) projects written using [Go](https://golang.org) language:
 
 - [odtimetracker-go-cli](https://github.com/odTimeTracker/odtimetracker-go-cli)
@@ -12,6 +10,8 @@ Library is used in other [odTimeTracker](https://github.com/odTimeTracker) proje
 Just write this:
 
 	go get github.com/odTimeTracker/odtimetracker-go-lib
+	go build
+	go install
 
 If you have correctly installed **Go** language this will download sources and build them immediatelly.
 
