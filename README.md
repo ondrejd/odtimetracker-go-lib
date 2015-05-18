@@ -15,3 +15,11 @@ Just write this:
 
 If you have correctly installed **Go** language this will download sources and build them immediatelly.
 
+## Documentation
+
+After `odtimetracker-go-lib` is successfully built documentation is available using [godoc](http://godoc.org/golang.org/x/tools/cmd/godoc). Just use this command:
+
+	godoc -http=localhost:4040
+
+And then navigate your browser to `http://localhost:4040/pkg/github.com/odTimeTracker/odtimetracker-go-lib/`.
+

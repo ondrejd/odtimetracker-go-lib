@@ -55,7 +55,7 @@ type Project struct {
 
 // Returns `Created` string as regular instance of `time.Time`.
 func (p *Project) CreatedTime() (time.Time, error) {
-	return time.Parse(p.Created, time.RFC3339)
+	return time.Parse(time.RFC3339, p.Created)
 }
 
 // Activity definition
@@ -332,9 +332,9 @@ func SelectProjectById(db *sql.DB, id ...int64) (p []Project, err error) {
 	for _, id := range id {
 		ids = append(ids, strconv.FormatInt(id, 10))
 	}
-	idsStr := strings.Join(ids, ", ")
+	idsStr := strings.Join(ids, ",")
 
-	sqlStmt := "SELECT * FROM Projects WHERE Id IN (" + idsStr + ")"
+	sqlStmt := "SELECT * FROM Projects WHERE ProjectId IN (" + idsStr + ")"
 	rows, err := db.Query(sqlStmt)
 	if err != nil {
 		return p, err
