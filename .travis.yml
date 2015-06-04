@@ -1,0 +1,10 @@
+language: go
+
+go:
+  - tip
+
+env:
+  - GOARCH=amd64
+
+install:
+  - go get github.com/mattn/go-sqlite3
