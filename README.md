@@ -1,5 +1,7 @@
 # odTimeTracker libraries written in Go
 
+[![Build Status](https://travis-ci.org/ondrejd/odtimetracker-go-lib.svg)](https://travis-ci.org/ondrejd/odtimetracker-go-lib)
+
 Library is used in other [odTimeTracker](https://github.com/odTimeTracker) projects written using [Go](https://golang.org) language:
 
 - [odtimetracker-go-cli](https://github.com/odTimeTracker/odtimetracker-go-cli)
@@ -22,4 +24,3 @@ After `odtimetracker-go-lib` is successfully built documentation is available us
 	godoc -http=localhost:4040
 
 And then navigate your browser to `http://localhost:4040/pkg/github.com/odTimeTracker/odtimetracker-go-lib/`.
-
