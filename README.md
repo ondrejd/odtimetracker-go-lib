@@ -1,6 +1,6 @@
 # odTimeTracker libraries written in Go
 
-[![Build Status](https://travis-ci.org/ondrejd/odtimetracker-go-lib.svg)](https://travis-ci.org/ondrejd/odtimetracker-go-lib)
+[![License](https://img.shields.io/badge/license-MPL-blue.svg)](https://www.mozilla.org/MPL/2.0/) [![Build Status](https://travis-ci.org/ondrejd/odtimetracker-go-lib.svg)](https://travis-ci.org/ondrejd/odtimetracker-go-lib)
 
 Library is used in other [odTimeTracker](https://github.com/odTimeTracker) projects written using [Go](https://golang.org) language:
 
