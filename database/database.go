@@ -1,7 +1,7 @@
 // Copyright 2015 Ondrej Donek. All rights reserved.
 // See LICENSE file for more informations about licensing.
 
-// Holds all what neccessary for odTimeTracker database - datatypes 
+// Holds all what neccessary for odTimeTracker database - datatypes
 // `Activity` and `Project` and functions for manipulating data.
 package database
 
@@ -27,7 +27,7 @@ const descriptionSep = "#"
 // Schema for our SQLite database
 const schemaSql = `
 CREATE TABLE Projects (
-	ProjectId INTEGER PRIMARY KEY, 
+	ProjectId INTEGER PRIMARY KEY,
 	Name TEXT,
 	Description TEXT,
 	Created TEXT NOT NULL
@@ -40,7 +40,7 @@ CREATE TABLE Activities (
 	Tags TEXT,
 	Started TEXT NOT NULL,
 	Stopped TEXT NOT NULL DEFAULT '',
-	FOREIGN KEY(ProjectId) REFERENCES Projects(ProjectId) 
+	FOREIGN KEY(ProjectId) REFERENCES Projects(ProjectId)
 );
 PRAGMA user_version = 1;
 `
@@ -195,8 +195,8 @@ func InitStorage(path string) (db *sql.DB, err error) {
 // Insert new activity.
 func InsertActivity(db *sql.DB, pid int64, name string, desc string, tags string) (a Activity, err error) {
 	sqlStmt := `
-	INSERT INTO Activities 
-	(ProjectId, Name, Description, Tags, Started) 
+	INSERT INTO Activities
+	(ProjectId, Name, Description, Tags, Started)
 	VALUES (?, ?, ?, ?, ?)
 	`
 	stmt, err := db.Prepare(sqlStmt)
@@ -228,8 +228,8 @@ func InsertActivity(db *sql.DB, pid int64, name string, desc string, tags string
 // Insert new project.
 func InsertProject(db *sql.DB, name string, desc string) (p Project, err error) {
 	sqlStmt := `
-	INSERT INTO Projects 
-	(Name, Description, Created) 
+	INSERT INTO Projects
+	(Name, Description, Created)
 	VALUES (?, ?, ?)
 	`
 	stmt, err := db.Prepare(sqlStmt)
@@ -359,19 +359,31 @@ func SelectProjectByName(db *sql.DB, name ...string) (projects []Project, err er
 	return parseProjectsFromRows(rows)
 }
 
+// Return project(s) which names contains given term.
+func SelectProjectWithTerm(db *sql.DB, term string) (projects []Project, err error) {
+	sqlStmt := "SELECT * FROM Projects WHERE Name LIKE \"%" + term + "%\" ";
+	rows, err := db.Query(sqlStmt)
+	if err != nil {
+		return projects, err
+	}
+
+	defer rows.Close()
+	return parseProjectsFromRows(rows)
+}
+
 // Update activity in the database
 // Return 1 if update was successfull otherwise 0.
 func UpdateActivity(db *sql.DB, a Activity) (cnt int64, err error) {
 	sqlStmt := `
-	UPDATE Activities 
+	UPDATE Activities
 	SET
-	ProjectId = ?, 
-	Name = ?, 
-	Description = ?, 
-	Tags = ?, 
-	Started = ?, 
-	Stopped = ? 
-	WHERE ActivityId = ? 
+	ProjectId = ?,
+	Name = ?,
+	Description = ?,
+	Tags = ?,
+	Started = ?,
+	Stopped = ?
+	WHERE ActivityId = ?
 	`
 	stmt, err := db.Prepare(sqlStmt)
 	if err != nil {
@@ -391,12 +403,12 @@ func UpdateActivity(db *sql.DB, a Activity) (cnt int64, err error) {
 // Return 1 if update was successfull otherwise 0.
 func UpdateProject(db *sql.DB, p Project) (cnt int64, err error) {
 	sqlStmt := `
-	UPDATE Projects 
-	SET 
-	Name = ?, 
-	Description = ?, 
-	Created = ? 
-	WHERE ProjectId = ? 
+	UPDATE Projects
+	SET
+	Name = ?,
+	Description = ?,
+	Created = ?
+	WHERE ProjectId = ?
 	`
 	stmt, err := db.Prepare(sqlStmt)
 	if err != nil {
